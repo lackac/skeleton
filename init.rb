@@ -13,12 +13,22 @@ require "ohm"
 require "haml"
 require "sass"
 require "compass"
+require 'gadgeteer'
+
+# Getting rid of default :escape_html => true
+class Monk::Glue
+  def haml(*args)
+    super
+  end
+end
 
 class Main < Monk::Glue
   set :app_file, __FILE__
   set :public_path, root_path("public")
   set :haml, { :format => :html5 }
   use Rack::Session::Cookie
+
+  include Gadgeteer
 
   configure do
     Compass.configuration do |config|

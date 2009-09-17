@@ -1,0 +1,29 @@
+// See screen.sass for further explanation
+
+// Normal column width but only 19 columns gives 750px total width
+!blueprint_grid_columns = 19
+
+@import partials/base.sass
+
++blueprint-typography
+body
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+form
+  +blueprint-form
+
+#container
+  +container
+#header, #footer
+  +column(!blueprint_grid_columns)
+#sidebar
+  // One third of the grid columns, rounding down. With 24 cols, this is 8.
+  !sidebar_columns = floor(!blueprint_grid_columns / 3)
+  +column(!sidebar_columns)
+#page
+  // Two thirds of the grid columns, rounding up.
+  // With 24 cols, this is 16.
+  !content_columns = ceil(2 * !blueprint_grid_columns / 3)
+  // true means it's the last column in the row
+  +column(!content_columns, true)

@@ -1,0 +1,28 @@
+- backend_host = "#{request.scheme}://#{request.host}"
+%html
+  %head
+    %meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    %link(rel="stylesheet" media="screen, projection" type="text/css"
+          href="/css/canvas.css")
+    /[if IE]
+      %link(rel="stylesheet" media="screen, projection" type="text/css"
+            href="/css/ie.css")
+    - %w{opensocial-jquery jquery.livequery jquery.form jquery.gadgeteer}.each do |jsfile|
+      %script(src="/js/#{jsfile}.js" type="text/javascript")
+    %script(type="text/javascript")
+      == backendHost = "#{backend_host}";
+    %script(src="/js/gadget.js" type="text/javascript")
+
+    %script(type="text/os-data"
+            xmlns:os="http://ns.opensocial.org/2008/markup")
+      %os:OwnerRequest(key="owner")
+      %os:ViewerRequest(key="viewer")
+      %os:PersonAppDataRequest(key="ownerData" method="appdata.get"
+                               userId="@owner" appId="@app")
+      %os:PersonAppDataRequest(key="viewerData" method="appdata.get"
+                               userId="@viewer" appId="@app")
+  %body
+    #container
+      #header
+        %h1 Gadget
+      #page
