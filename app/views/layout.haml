@@ -1,10 +1,19 @@
-!!! Strict
+!!!
 %html
   %head
     %title
-    %meta{:"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}/
-    %link{:rel => "stylesheet", :href => "/css/reset.css", :type => "text/css"}/
-    %link{:rel => "stylesheet", :href => "/css/main.css", :type => "text/css"}/
+    %meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    %link(rel="stylesheet" media="screen, projection" type="text/css"
+          href="/css/screen.css")
+    %link(rel="stylesheet" media="print" type="text/css" href="/css/print.css")
+    /[if IE]
+      %link(rel="stylesheet" media="screen, projection" type="text/css"
+            href="/css/ie.css")
 
   %body
-    != yield
+    #container
+      #header
+      #content
+        != yield
+      #sidebar
+      #footer
